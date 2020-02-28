@@ -1,4 +1,8 @@
 okay lol anyways just checking if stuff works
+okay so the comment tags worked.
+# Yay
+## Yayy
+### Yayyy
 {%comment %}
 ## Welcome to GitHub Pages
 
