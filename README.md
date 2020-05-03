@@ -1,40 +1,8 @@
-Readme file for my website.
-{%comment %}
-## Welcome to GitHub Pages
+Hi!
+Welcome to my website. Since forever I've wanted to have my own website, and here it is!
 
-You can use the [editor on GitHub](https://github.com/arushsharma24/arushsharma24.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+I knew HTML since long, but never really felt like making web pages, despite my desires. However, I recently discovered why, when I started learning CSS. Man can I now make some good-looking websites!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Lol kidding, I've just started out and am a big noob at this, but it's fun and that's what the point is, so yay!
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/arushsharma24/arushsharma24.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
-{%endcomment %}
+Cheerio!!
