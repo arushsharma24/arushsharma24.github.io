@@ -1,8 +1,4 @@
-okay lol anyways just checking if stuff works
-okay so the comment tags worked.
-# Yay
-## Yayy
-### Yayyy
+Readme file for my website.
 {%comment %}
 ## Welcome to GitHub Pages
 
