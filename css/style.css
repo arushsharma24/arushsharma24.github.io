@@ -1,17 +1,29 @@
 *{
     /* border: solid #000000;; */
+    box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
     }
 header {
+    display: inline-block;
+    /* float: left; */
+    width: 100%;
+    margin: 5px 10px;
     background: #fff00f;
     background: -moz-linear-gradient(to right, #381192, #78a3cc);
     text-align: center;
     padding: 10px 5px;
 }
 header a{
-    color: #ffff0f;
+    color: #2e000b;
     background: #808070;
-    text-decoration: double;
+    /* text-decoration: double; */
+    font-family: 'Courier New', Courier, monospace;
+    /* z-index: 1000000000; */
+}
+a:hover{
+    color: #808070;
+    background: #2e000b;
+    /* text-decoration:  */
     font-family: 'Courier New', Courier, monospace;
 }
 main h2{
