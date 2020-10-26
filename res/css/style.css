@@ -56,7 +56,7 @@ h3{
     padding: 4vh;
 }
 #sec-contact h2 {
-    color: black;
+    color: #ffffff;
 }
 #sec-head{
     background-position: center;
@@ -103,6 +103,16 @@ h3{
 	margin-bottom: 15px;
 	width: 90%;
 	max-height: 100px;
+}
+
+.hahano{
+    background-color: #000000;
+    color: #000000;
+}
+
+.hahano:hover{
+    background-color: transparent;
+    color: #ffffff;
 }
 
 .desc{
