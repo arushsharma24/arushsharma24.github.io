@@ -143,6 +143,7 @@ h3{
     text-align: center;
 }
 #sec-fun > a, #sec-hobbies > a, #sec-work > a{
+    display: none;
     position: absolute;
     bottom: 5vh;
     right: 20vw;
