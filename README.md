@@ -1,1 +1,1 @@
-Just another portfolio-website
+Making my portfolio website afresh using NextJS
