@@ -22,7 +22,7 @@ Here are the steps that you can follow:
 
 ### Generate and Add Signing Key to Github
 It is different from Verification Key, even if using the same key, go to add key and select `Signing Key` in the drop down (Authentication key is the default otherwise)
-
+After adding the key, make sure to tell git about your signing key as mentioned [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key#telling-git-about-your-ssh-key)
 If you haven't added/configured an Authentication Key, go to this blog [text for link to other blog](link.to.other.blog)
 
 ### Make signed commits
