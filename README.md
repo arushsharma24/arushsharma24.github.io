@@ -1,7 +1,14 @@
-Hi!
+Hi. I am Arush Sharma, a Software Engineer at Cisco, and a tech enthusiast who loves to try out new things and technologies.
 
-Welcome to my portfolio website. I am Arush Sharma, just another human being with a passion for travelling, music and of course, building cool stuff with software :)
+Progress tracker for this website:
+ - [ ] Add blogs support
+ - [ ] Add blogs
+ - [ ] Change color theming
+ - [ ] Add 'projects' page
+ - [ ] Add fun projects to that page
 
+Notes:
+ - The deployment on github pages will only be updated if the out/ directory with the latest build artifacts has also been uploaded to github
 
-This website is going to be revamped. Here are a few websites I like that I would like it to look like that inspire me:
- - https://www.rocktimsaikia.dev/
+References:
+ - [Inspiration/Eyeball reference](https://rocktimsaikia.dev/)
