@@ -6,3 +6,6 @@ Progress tracker for this website:
  - [ ] Change color theming
  - [ ] Add 'projects' page
  - [ ] Add fun projects to that page
+
+Notes:
+ - The deployment on github pages will only be updated if the out/ directory with the latest build artifacts has also been uploaded to github
