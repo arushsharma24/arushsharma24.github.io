@@ -9,3 +9,6 @@ Progress tracker for this website:
 
 Notes:
  - The deployment on github pages will only be updated if the out/ directory with the latest build artifacts has also been uploaded to github
+
+References:
+ - [Inspiration/Eyeball reference](https://rocktimsaikia.dev/)
