@@ -2,7 +2,8 @@ Hi. I am Arush Sharma, a Software Engineer at Cisco, and a tech enthusiast who l
 
 Progress tracker for this website:
  - [X] Add blogs support (basic)
- - [ ] Add date and time to blogs, and filtering and sorting in the display
+ - [X] Add date and time to blogs,
+ - [ ] and filtering, sorting and searching for blogs in the all blogs page
  - [ ] Change color theming
  - [ ] Add fun projects to projects page
 

@@ -22,13 +22,6 @@ export default function BlogPage() {
           This site is currently a work in progress. 
       </p>
       <br/>
-      {/* <p>
-      I write blogs on just about anything that interests me at that moment.
-      </p> */
-      // !TODO: Add a search bar for the blog page.
-      // !TODO: Add calendar features with the blog / dates related stuff
-      // DONE: Add a description section/one liner for the blog page.
-      }
       {allBlogs
         .sort((a, b) => {
           if (
