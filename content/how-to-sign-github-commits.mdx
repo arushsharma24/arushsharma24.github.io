@@ -1,20 +1,23 @@
+---
+title: 'Sign your github commits with your SSH key'
+publishedAt: '2023-07-05'
+summary: 'A guide to sign github commits so that they are counted as verified commits'
+---
+
 # Sign your github commits with your SSH key
-
-<!-- Some image -->
-
-<!-- Quote formatting: Part which talks about the gist of the blog (eg. facing an issue with this? this happens but want this to happen? yada yada) -->
 
 > Commits you push from your local aren't showing as "Verified" in the commit history? Reading online shows that you need to use GPG keys for it but you like SSH because you don't wanna mess with GPG for no reasonable reason? Perfect! Let me show you how to do it then 
 
 ## Introduction
-<!-- Basic introduction of the topic on hand -->
 When you push commits from your local repository to github, if you haven't configured commit signing, then they won't have the "Verified" tag with them, which may or may not matter, but definitely having "Verified" commits when they definitely came from you would be a better thing to have.
 
 <center>
 
-| ![Comparision of Verified and Unverified commits](images/how-to-sign-github-commits-1.png) |
+{/* /*
+// | ![Comparision of Verified and Unverified commits](/content/images/how-to-sign-github-commits-1.png) |
 |:--:|
 | *Verified commits do look cooler don't they lol* |
+*/ }
 
 </center>
 
@@ -30,7 +33,6 @@ Now, to make a signed commit, while making a commit, use the `-S` tag as shown i
 ```
 git commit -S -m "your commit message"
 ```
-<!-- etc etc for steps -->
 
 ### Autoconfigure terminal to sign commits by default
 Running the following command 

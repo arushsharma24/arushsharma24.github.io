@@ -19,7 +19,7 @@ export default function BlogPage() {
       <p className="prose prose-neutral dark:prose-invert">
           I write blogs on just about anything that interests me at that moment.
           <br/>
-          This site is currently a work in progress. 
+          Have not written anything significant yet, but will add more here soon :D
       </p>
       <br/>
       {allBlogs
