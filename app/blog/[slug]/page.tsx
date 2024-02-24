@@ -51,7 +51,7 @@ export async function generateMetadata({
 }
 
 function formatDate(date: string) {
-  noStore();
+//   noStore(); // Removing this option since it does not allow for static site generation.
   let currentDate = new Date();
   if (!date.includes('T')) {
     date = `${date}T00:00:00`;
@@ -103,16 +103,16 @@ export default function Blog({ params }: { params: { slug: string } }) {
       <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
         {post.metadata.title}
       </h1>
-      {/* <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]"> */}
-        {/* <Suspense fallback={<p className="h-5" />}>
+      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
+        <Suspense fallback={<p className="h-5" />}>
           <p className="text-sm text-neutral-600 dark:text-neutral-400">
             {formatDate(post.metadata.publishedAt)}
           </p>
-        </Suspense> */}
+        </Suspense>
         {/* <Suspense fallback={<p className="h-5" />}>
           <Views slug={post.slug} />
         </Suspense> */}
-      {/* </div> */}
+      </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>
