@@ -2,6 +2,7 @@ Hi. I am Arush Sharma, a Software Engineer at Cisco, and a tech enthusiast who l
 
 Progress tracker for this website:
  - [ ] Change home page layout - add sections
+ - [ ] Add footer with links to LinkedIn, Github, and Resume
  - [ ] Change color theming
  - [ ] Add picture to homescreen
  - [ ] Add final home page desc
