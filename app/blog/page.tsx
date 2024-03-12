@@ -41,6 +41,9 @@ export default function BlogPage() {
               <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
                 {post.metadata.title}
               </p>
+              <p className="text-neutral-500 dark:text-neutral-400 text-sm tracking-tight mt-1">
+                {post.metadata.publishedAt}
+              </p>
               {/* <Suspense fallback={<p className="h-6" />}>
                 <Views slug={post.slug} />
               </Suspense> */}
