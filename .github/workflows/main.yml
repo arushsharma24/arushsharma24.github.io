@@ -46,7 +46,7 @@ jobs:
           
           **Pipeline:** [Github Action](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})
         commit-message: "test: Changes made by GitHub App"
-        lables: "automated"
+        labels: "automated"
         add-paths: |
           test_file.txt
 
