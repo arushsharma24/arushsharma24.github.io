@@ -20,21 +20,49 @@ jobs:
         token: ${{ steps.generate_token.outputs.token }}
         repository: arushsharma24/project-ideas
         ref: main
-        path: .github/my-project-ideas
+        fetch-depth: 0
+        clean: true
+        path: ./source-repo
 
-    - name: Test App Permissions
-      env:
-        GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+    - name: Create changes
+      working-directory: ./source-repo
       run: |
-        echo "Testing repository access..."
-        ls .github/my-project-ideas
-        pwd
-        cd .github/my-project-ideas
-
-        echo "Testing file creation..."
         echo "This file was created by the GitHub App" > test_file.txt
         git config user.name "Sherlock"
         git config user.email "sherlock@example.com"
-        git add test_file.txt
-        git commit -m "Test commit by GitHub App"
-        git push
+
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ steps.generate_token.outputs.token }}
+        path: ./source-repo
+        base: main
+        branch: test-github-app
+        delete-branch: true
+        title: "Test: GitHub App Changes"
+        body: |
+          This is a test pull request created by the GitHub App.
+          
+          **Pipeline:** [Github Action](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})
+        commit-message: "test: Changes made by GitHub App"
+        lables: "automated"
+        add-paths: |
+          test_file.txt
+
+    - name: Check outputs
+      if: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+        echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+
+    - name: Extract project name from repo
+      id: project_name
+      run: |
+        echo "name=$(basename "${{ github.repository }}" | sed -E 's/-[^-]+$//')" >> $GITHUB_OUTPUT
+
+    - name: Get PR URL
+      id: pr_url
+      run: |
+        echo "url=${{ steps.cpr.outputs.pull-request-url }}" >> $GITHUB_OUTPUT
+        echo "number=${{ steps.cpr.outputs.pull-request-number }}" >> $GITHUB_OUTPUT
