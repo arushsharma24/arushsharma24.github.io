@@ -28,6 +28,8 @@ jobs:
       run: |
         echo "Testing repository access..."
         ls .github/my-project-ideas
+        pwd
+        cd .github/my-project-ideas
 
         echo "Testing file creation..."
         echo "This file was created by the GitHub App" > test_file.txt
