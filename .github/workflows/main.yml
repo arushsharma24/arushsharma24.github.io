@@ -38,8 +38,6 @@ jobs:
         token: ${{ steps.generate_token.outputs.token }}
         path: ./source-repo
         base: main
-        branch: test-github-app
-        delete-branch: true
         title: "Test: GitHub App Changes"
         body: |
           This is a test pull request created by the GitHub App.
