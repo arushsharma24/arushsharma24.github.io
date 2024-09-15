@@ -5,10 +5,10 @@ export default function Page() {
     <section>
       <h1 className="font-medium text-2xl mb-8 tracking-tighter">hi! &nbsp; i&apos;m arush :) </h1>
       <p className="prose prose-neutral dark:prose-invert">
-        I&apos;m currently a software engineer at <Link href="https://www.empirical.run/">Empirical</Link>, before which I worked at <Link href="https://www.cisco.com/">Cisco</Link>
+        I&apos;m a software engineer based in Bengaluru, and love to build full stack apps and software
         <br />
         <br />
-        I (wish) &amp; love to travel and explore the world, think and exchange ideas with other people and enjoy life.
+        I (wish) &amp; love to travel and explore the world, think and exchange ideas with people
         <br />
         <br />
         Cheers!
