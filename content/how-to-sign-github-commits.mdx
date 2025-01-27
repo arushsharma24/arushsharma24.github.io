@@ -1,7 +1,7 @@
 ---
 title: 'How and why to sign your github commits with your SSH key'
 publishedAt: '2023-07-05'
-summary: 'A guide to sign github commits so that they are counted as verified commits'
+summary: 'A guide to sign git commits with SSH key'
 ---
 
 # Sign your github commits with your SSH key
@@ -51,3 +51,11 @@ This basically adds this part to your gitconfig:
 ```
 
 > And that's all! Now go make verified commits for your completely untrustable code! 🤠
+
+
+#### Notes
+ - SSH signing is only available with git>=2.34 (changelog)[https://lore.kernel.org/git/xmqq8rxpgwki.fsf@gitster.g/]
+> In addition to GnuPG, ssh public crypto can be used for object and
+   push-cert signing.  Note that this feature cannot be used with
+   ssh-keygen from OpenSSH 8.7, whose support for it is broken.  Avoid
+   using it unless you update to OpenSSH 8.8.
