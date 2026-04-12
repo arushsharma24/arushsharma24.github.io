@@ -1,4 +1,0 @@
-User-Agent: *
-
-Host: https://leerob.io
-Sitemap: https://leerob.io/sitemap.xml
