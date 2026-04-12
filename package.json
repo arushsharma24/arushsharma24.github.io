@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
+    "build:pages": "rm -rf .next out && next build",
     "build-only": "next build",
     "start": "next start"
   },
