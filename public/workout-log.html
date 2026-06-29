@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Training Reference</title>
+<title>Training Log</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
 
@@ -17,8 +17,10 @@
     --text-faint: #6B6457;
     --accent: #D98B3C;
     --accent-dim: #5A3F23;
+    --accent-soft: #2c231b;
     --done: #6E9A6E;
     --done-bg: #1D2419;
+    --field: #181612;
   }
 
   *{ box-sizing: border-box; margin:0; padding:0; }
@@ -57,6 +59,28 @@
     color: var(--text-dim);
     font-size: 13px;
     margin-top: 4px;
+  }
+
+  .info-panel{
+    background: linear-gradient(180deg, rgba(217,139,60,0.12), rgba(217,139,60,0.04));
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px;
+    margin: 18px 0 22px;
+  }
+
+  .info-title{
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .info-copy{
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
   }
 
   /* Day tabs */
@@ -119,6 +143,88 @@
   }
   .meta-strip span.hl{ color: var(--accent); }
 
+  .conditioning{
+    display:grid;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  @media (min-width: 640px){
+    .conditioning{ grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .condition-card{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .condition-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .condition-name{
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .condition-target{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+  }
+
+  .condition-grid{
+    display:grid;
+    gap: 8px;
+  }
+
+  .field-label{
+    display:block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+
+  .field,
+  .field-textarea{
+    width: 100%;
+    background: var(--field);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font: inherit;
+    padding: 10px 11px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .field::placeholder,
+  .field-textarea::placeholder{
+    color: var(--text-faint);
+  }
+
+  .field:focus,
+  .field-textarea:focus{
+    border-color: var(--accent);
+    background: #1c1914;
+  }
+
+  .field-textarea{
+    min-height: 72px;
+    resize: vertical;
+    line-height: 1.45;
+  }
+
   /* Exercise card */
   .ex-list{ display:flex; flex-direction:column; gap:10px; }
 
@@ -126,39 +232,13 @@
     background: var(--bg-card);
     border: 1px solid var(--line);
     border-radius: 8px;
-    padding: 14px 14px 14px 12px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+    padding: 14px;
     transition: background 0.15s, border-color 0.15s, opacity 0.15s;
   }
   .ex.done{
     background: var(--done-bg);
     border-color: #2E3D26;
-    opacity: 0.7;
   }
-
-  .check{
-    flex-shrink:0;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--text-faint);
-    margin-top: 2px;
-    cursor: pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .ex.done .check{
-    border-color: var(--done);
-    background: var(--done);
-  }
-  .check svg{ width:12px; height:12px; opacity:0; transition: opacity 0.1s; }
-  .ex.done .check svg{ opacity:1; }
-
-  .ex-body{ flex: 1; min-width: 0; }
 
   .ex-top{
     display:flex;
@@ -175,7 +255,7 @@
     text-transform: uppercase;
     letter-spacing: 0.01em;
   }
-  .ex.done .ex-name{ text-decoration: line-through; color: var(--text-dim); }
+  .ex.done .ex-name{ color: #d8ecd4; }
 
   .ex-sets{
     font-family: 'JetBrains Mono', monospace;
@@ -189,8 +269,132 @@
   .ex-note{
     font-size: 12.5px;
     color: var(--text-dim);
-    margin-top: 4px;
+    margin-top: 6px;
     line-height: 1.4;
+  }
+
+  .ex-stats{
+    margin-top: 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 6px 10px;
+    background: var(--accent-soft);
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+
+  .status-pill.complete{
+    background: rgba(110, 154, 110, 0.16);
+    color: #bfd7bf;
+  }
+
+  .ex-actions{
+    display:flex;
+    gap: 8px;
+  }
+
+  .mini-btn{
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 7px 10px;
+    cursor: pointer;
+  }
+
+  .mini-btn:hover{
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .set-list{
+    display:grid;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .set-row{
+    background: rgba(0,0,0,0.12);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .set-row.done{
+    border-color: #355033;
+    background: rgba(110, 154, 110, 0.1);
+  }
+
+  .set-grid{
+    display:grid;
+    gap: 8px;
+    align-items:end;
+  }
+
+  @media (min-width: 620px){
+    .set-grid{
+      grid-template-columns: 78px 1fr 1fr 112px;
+    }
+  }
+
+  .set-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .check-wrap{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    align-self:center;
+    padding-top: 4px;
+  }
+
+  .check-input{
+    width: 18px;
+    height: 18px;
+    accent-color: var(--done);
+    cursor: pointer;
+  }
+
+  .check-copy{
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .exercise-comment{
+    margin-top: 10px;
+  }
+
+  .session-panel{
+    margin-top: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .session-title{
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
   }
 
   /* Progress footer */
@@ -244,22 +448,35 @@
 
   <header>
     <div class="eyebrow">Home &amp; Gym &middot; Pick a day</div>
-    <h1>Training Reference</h1>
-    <div class="sub">Tap a day, work through it, tick sets off as you go.</div>
+    <h1>Training Log</h1>
+    <div class="sub">Log the sets you actually did. It saves locally in this browser.</div>
   </header>
+
+  <section class="info-panel">
+    <div class="info-title">Built for your actual week</div>
+    <div class="info-copy">Lift 3-4 days, keep a little room for runs, sprint work, and racquet sports, and log the session with enough detail to spot what is moving well and what feels off.</div>
+  </section>
 
   <div class="tabs" id="tabs"></div>
 
   <div class="meta-strip">
     <span id="metaLabel"></span>
-    <span><span class="hl" id="metaCount"></span> exercises</span>
+    <span><span class="hl" id="metaCount"></span> exercises · <span class="hl" id="metaSets"></span> sets planned</span>
   </div>
+
+  <section class="conditioning" id="conditioning"></section>
 
   <div class="ex-list" id="exList"></div>
 
+  <section class="session-panel">
+    <div class="session-title">Session Notes</div>
+    <label class="field-label" for="sessionComment">What mattered today</label>
+    <textarea class="field-textarea" id="sessionComment" placeholder="Energy, aches, progress, things to change next time."></textarea>
+  </section>
+
   <div class="progress-wrap">
     <div class="bar"><div class="bar-fill" id="barFill"></div></div>
-    <div class="progress-text" id="progressText">0 / 0 done</div>
+    <div class="progress-text" id="progressText">0 / 0 sets logged</div>
   </div>
 
   <button class="reset-btn" id="resetBtn">Reset day</button>
@@ -267,19 +484,18 @@
 </div>
 
 <script>
-const STORAGE_KEY = 'workout-log-state-v1';
+const STORAGE_KEY = 'workout-log-state-v2';
 const DAYS = [
   {
     name: "Day 1",
     title: "Upper Body",
     focus: "Chest & Back Width",
     exercises: [
-      { name: "Ring Pull-Ups", sets: "3", reps: "To Failure", note: "Hang from the bar, strict form." },
-      { name: "Incline DB Bench Press", sets: "3", reps: "10-12", note: "Set bench to 30-45°. Hits the upper chest to fill out the collarbone area." },
-      { name: "Ring Rows", sets: "3", reps: "12-15", note: "Feet elevated on the bench to make it harder." },
-      { name: "Flat DB Bench Press", sets: "3", reps: "12-15", note: "Flat bench. Go all the way down until dumbbells touch your chest." },
-      { name: "Seated DB Lateral Raises", sets: "3", reps: "15", note: "Seated on bench — stops torso swing, makes 15kg feel much heavier." },
-      { name: "Hanging Knee/Leg Raises", sets: "3", reps: "12-15", note: "On the pull-up bar. Focus on pulling the pelvis up, not just the legs." }
+      { name: "Ring Pull-Ups", targetSets: 3, targetReps: "6-10", note: "Strict reps. Leave 1-2 reps in reserve on the first sets if you want steadier progress." },
+      { name: "Incline DB Chest Press", targetSets: 3, targetReps: "8-12", note: "Pick one incline and own it for a few weeks before changing the angle." },
+      { name: "Bent-Over DB Row or Ring Row", targetSets: 3, targetReps: "8-12", note: "Use the version that lets you load the movement cleanly today." },
+      { name: "Lateral Raises", targetSets: 3, targetReps: "10-15", note: "Keep momentum low. Chasing control beats chasing load here." },
+      { name: "Knee Raises or Crunches", targetSets: 3, targetReps: "10-15", note: "Pick one. Slow down the lowering phase." }
     ]
   },
   {
@@ -287,11 +503,11 @@ const DAYS = [
     title: "Lower Body",
     focus: "Glutes & Quad Focus",
     exercises: [
-      { name: "Deficit Bulgarian Split Squats", sets: "3", reps: "10-12/leg", note: "Back foot flat on the bench. Hold both 15kg DBs. Drop the back knee low." },
-      { name: "Single-Leg Bench Hip Thrusts", sets: "3", reps: "12-15/leg", note: "Upper back on bench edge, one leg in the air. One 15kg DB on the hip." },
-      { name: "Single Leg DB RDL", sets: "3", reps: "10-12/leg", note: "Standing on the floor, holding DBs, focus on the hamstrings." },
-      { name: "DB Bench Step-Ups", sets: "3", reps: "10/leg", note: "Step onto bench with one foot, drive up. Controlled descent." },
-      { name: "Calf Raises", sets: "4", reps: "15-20", note: "Hold DBs, use the bench leg frame or a step for full stretch." }
+      { name: "Split Squats", targetSets: 3, targetReps: "8-12/leg", note: "This is your main lower-body strength anchor. Track it closely." },
+      { name: "DB RDL", targetSets: 3, targetReps: "8-12", note: "Stay honest on hinge position and tempo." },
+      { name: "Step-Ups or Hip Thrusts", targetSets: 3, targetReps: "10-15", note: "Use the one that fits energy, knees, and setup friction that day." },
+      { name: "Calf Raises", targetSets: 4, targetReps: "12-20", note: "Pause at the stretched bottom. This helps more than bouncing reps." },
+      { name: "Plank", targetSets: 3, targetReps: "30-60 sec", note: "Brace hard. Stop before your lower back takes over." }
     ]
   },
   {
@@ -299,32 +515,52 @@ const DAYS = [
     title: "Upper Body",
     focus: "Shoulders & Arm Hypertrophy",
     exercises: [
-      { name: "Chest-Supported DB Row", sets: "3", reps: "10-12", note: "Incline bench at 30°, lie chest-down. Eliminates lower-back cheating." },
-      { name: "Seated DB Overhead Press", sets: "3", reps: "10-12", note: "Bench vertical or slight incline. Heavy shoulder press with back support." },
-      { name: "Incline DB Bicep Curls", sets: "3", reps: "10-12", note: "Incline bench at 45°. Arms hang straight down, then curl — big stretch on the bicep." },
-      { name: "Ring Dips or Bench Dips", sets: "3", reps: "To Failure", note: "If ring dips are too hard, do bench dips with feet elevated on a chair." },
-      { name: "Incline DB Rear Delt Flyes", sets: "3", reps: "15", note: "Lie chest-down on 30° incline, fly weights out to the side for rear delts." },
-      { name: "Bench Lying Leg Raises", sets: "3", reps: "15", note: "Lie flat on bench, hold top of bench behind head, raise legs." }
+      { name: "DB Chest Press", targetSets: 3, targetReps: "8-12", note: "Flat or another incline. Track angle in the comment if you vary it." },
+      { name: "Pull-Ups or Ring Pull-Ups", targetSets: 3, targetReps: "6-10", note: "Useful to alternate grips if elbows or shoulders feel beat up." },
+      { name: "Bicep Curls", targetSets: 3, targetReps: "8-12", note: "Run these close to failure with clean tempo." },
+      { name: "Push-Ups or Dips", targetSets: 3, targetReps: "8-15", note: "Use the version that gives you a hard set inside the target range." },
+      { name: "Rear Delt Flyes", targetSets: 3, targetReps: "12-15", note: "Good place to chase burn, not ego." }
     ]
   },
   {
     name: "Day 4",
-    title: "Gym Day",
-    focus: "Heavy Iron & Power",
+    title: "Flexible Day",
+    focus: "Extra Lift / Make-Up / Gym",
     exercises: [
-      { name: "Barbell Back Squat", sets: "3", reps: "5-8", note: "Heavy leg stimulation you can't replicate at home." },
-      { name: "Deadlift (Conventional)", sets: "3", reps: "5", note: "Heavy posterior chain — back and hamstrings." },
-      { name: "Barbell Bench Press", sets: "3", reps: "6-8", note: "Test your maximum chest power." },
-      { name: "Lat Pulldown / Cable Row", sets: "3", reps: "8-10", note: "Overload the back with heavy machine weight." },
-      { name: "Leg Press or Hack Squat", sets: "2", reps: "12-15", note: "Finish off the quads safely until failure." }
+      { name: "Gym Compound or Extra Pull", targetSets: 3, targetReps: "5-8", note: "Use this if you make it to a gym or want a heavier anchor." },
+      { name: "Single-Leg Work", targetSets: 3, targetReps: "8-12/leg", note: "Good slot for balance, control, and ankle-knee-hip integrity." },
+      { name: "Horizontal Push", targetSets: 3, targetReps: "8-12", note: "Pick the press variation you missed earlier in the week." },
+      { name: "Row / Pulldown", targetSets: 3, targetReps: "8-12", note: "Bias the back if your pressing volume is already high." },
+      { name: "Carries / Core / Mobility", targetSets: 2, targetReps: "Finisher", note: "Farmer holds, planks, or a quick reset block fit well here." }
     ]
   }
+];
+
+const CONDITIONING = [
+  { key: 'run', name: 'Runs', target: '2-3 / week', placeholder: 'Easy run, distance, pace, route.' },
+  { key: 'sprint', name: 'Sprints', target: '0-1 / week', placeholder: 'Ex: 6 x 15s, 2:15 rest, felt sharp.' },
+  { key: 'sport', name: 'Sport', target: '1+ / week', placeholder: 'Racquet sport, duration, how the body felt.' }
 ];
 
 function createDefaultState() {
   return {
     activeDay: 0,
-    doneState: DAYS.map(day => day.exercises.map(() => false))
+    days: DAYS.map(day => ({
+      sessionComment: '',
+      exercises: day.exercises.map(ex => ({
+        comment: '',
+        sets: Array.from({ length: ex.targetSets }, () => ({
+          reps: '',
+          weight: '',
+          comment: '',
+          done: false
+        }))
+      }))
+    })),
+    conditioning: CONDITIONING.reduce((acc, item) => {
+      acc[item.key] = { count: '', note: '' };
+      return acc;
+    }, {})
   };
 }
 
@@ -342,12 +578,45 @@ function normalizeState(raw) {
       ? raw.activeDay
       : fallback.activeDay;
 
-  const doneState = DAYS.map((day, dayIndex) => {
-    const rawDay = Array.isArray(raw.doneState?.[dayIndex]) ? raw.doneState[dayIndex] : [];
-    return day.exercises.map((_, exIndex) => Boolean(rawDay[exIndex]));
+  const days = DAYS.map((day, dayIndex) => {
+    const rawDay = raw.days?.[dayIndex];
+
+    return {
+      sessionComment: typeof rawDay?.sessionComment === 'string' ? rawDay.sessionComment : '',
+      exercises: day.exercises.map((exercise, exerciseIndex) => {
+        const rawExercise = rawDay?.exercises?.[exerciseIndex];
+        const rawSets = Array.isArray(rawExercise?.sets) ? rawExercise.sets : [];
+        const normalizedSets = rawSets
+          .slice(0, 20)
+          .map(set => ({
+            reps: typeof set?.reps === 'string' ? set.reps : '',
+            weight: typeof set?.weight === 'string' ? set.weight : '',
+            comment: typeof set?.comment === 'string' ? set.comment : '',
+            done: Boolean(set?.done)
+          }));
+
+        while (normalizedSets.length < exercise.targetSets) {
+          normalizedSets.push({ reps: '', weight: '', comment: '', done: false });
+        }
+
+        return {
+          comment: typeof rawExercise?.comment === 'string' ? rawExercise.comment : '',
+          sets: normalizedSets
+        };
+      })
+    };
   });
 
-  return { activeDay, doneState };
+  const conditioning = CONDITIONING.reduce((acc, item) => {
+    const rawCondition = raw.conditioning?.[item.key];
+    acc[item.key] = {
+      count: typeof rawCondition?.count === 'string' ? rawCondition.count : '',
+      note: typeof rawCondition?.note === 'string' ? rawCondition.note : ''
+    };
+    return acc;
+  }, {});
+
+  return { activeDay, days, conditioning };
 }
 
 function loadState() {
@@ -362,21 +631,41 @@ function saveState() {
   try {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ activeDay, doneState })
+      JSON.stringify({ activeDay, days, conditioning })
     );
   } catch {
     // Ignore storage failures so the app still works in private browsing or restricted contexts.
   }
 }
 
-let { activeDay, doneState } = loadState();
+let { activeDay, days, conditioning } = loadState();
 
 const tabsEl = document.getElementById('tabs');
+const conditioningEl = document.getElementById('conditioning');
 const exListEl = document.getElementById('exList');
 const metaLabel = document.getElementById('metaLabel');
 const metaCount = document.getElementById('metaCount');
+const metaSets = document.getElementById('metaSets');
 const barFill = document.getElementById('barFill');
 const progressText = document.getElementById('progressText');
+const sessionCommentEl = document.getElementById('sessionComment');
+
+function getExerciseLog(dayIndex, exerciseIndex) {
+  return days[dayIndex].exercises[exerciseIndex];
+}
+
+function getSetSummary(dayIndex) {
+  const exercises = days[dayIndex].exercises;
+  let done = 0;
+  let total = 0;
+
+  exercises.forEach(exercise => {
+    total += exercise.sets.length;
+    done += exercise.sets.filter(set => set.done).length;
+  });
+
+  return { done, total };
+}
 
 function renderTabs(){
   tabsEl.innerHTML = '';
@@ -397,55 +686,197 @@ function renderTabs(){
   });
 }
 
+function renderConditioning() {
+  conditioningEl.innerHTML = '';
+
+  CONDITIONING.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'condition-card';
+    card.innerHTML = `
+      <div class="condition-top">
+        <div class="condition-name">${item.name}</div>
+        <div class="condition-target">${item.target}</div>
+      </div>
+      <div class="condition-grid">
+        <div>
+          <label class="field-label" for="cond-${item.key}-count">Sessions this week</label>
+          <input class="field" id="cond-${item.key}-count" type="text" inputmode="numeric" placeholder="0" value="${conditioning[item.key].count}">
+        </div>
+        <div>
+          <label class="field-label" for="cond-${item.key}-note">Notes</label>
+          <textarea class="field-textarea" id="cond-${item.key}-note" placeholder="${item.placeholder}">${conditioning[item.key].note}</textarea>
+        </div>
+      </div>
+    `;
+
+    const countEl = card.querySelector(`#cond-${item.key}-count`);
+    const noteEl = card.querySelector(`#cond-${item.key}-note`);
+
+    countEl.addEventListener('input', event => {
+      conditioning[item.key].count = event.target.value;
+      saveState();
+    });
+
+    noteEl.addEventListener('input', event => {
+      conditioning[item.key].note = event.target.value;
+      saveState();
+    });
+
+    conditioningEl.appendChild(card);
+  });
+}
+
 function renderList(){
   const day = DAYS[activeDay];
+  const dayLog = days[activeDay];
   exListEl.innerHTML = '';
   metaLabel.textContent = `${day.title} — ${day.focus}`;
   metaCount.textContent = day.exercises.length;
+  metaSets.textContent = day.exercises.reduce((sum, exercise) => sum + exercise.targetSets, 0);
+  sessionCommentEl.value = dayLog.sessionComment;
 
   day.exercises.forEach((ex, i) => {
-    const isDone = doneState[activeDay][i];
+    const exerciseLog = getExerciseLog(activeDay, i);
+    const completedSets = exerciseLog.sets.filter(set => set.done).length;
+    const totalSets = exerciseLog.sets.length;
+    const isDone = totalSets > 0 && completedSets === totalSets;
     const card = document.createElement('div');
     card.className = 'ex' + (isDone ? ' done' : '');
-    card.innerHTML = `
-      <div class="check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#161513" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      </div>
-      <div class="ex-body">
-        <div class="ex-top">
-          <div class="ex-name">${ex.name}</div>
-          <div class="ex-sets">${ex.sets} × ${ex.reps}</div>
+    const setRows = exerciseLog.sets.map((set, setIndex) => `
+      <div class="set-row${set.done ? ' done' : ''}">
+        <div class="set-grid">
+          <div class="set-label">Set ${setIndex + 1}</div>
+          <div>
+            <label class="field-label" for="ex-${i}-set-${setIndex}-reps">Actual reps</label>
+            <input class="field set-input" id="ex-${i}-set-${setIndex}-reps" data-exercise-index="${i}" data-set-index="${setIndex}" data-field="reps" type="text" inputmode="decimal" placeholder="${ex.targetReps}" value="${set.reps}">
+          </div>
+          <div>
+            <label class="field-label" for="ex-${i}-set-${setIndex}-weight">Load</label>
+            <input class="field set-input" id="ex-${i}-set-${setIndex}-weight" data-exercise-index="${i}" data-set-index="${setIndex}" data-field="weight" type="text" inputmode="decimal" placeholder="kg / bw" value="${set.weight}">
+          </div>
+          <label class="check-wrap" for="ex-${i}-set-${setIndex}-done">
+            <input class="check-input set-check" id="ex-${i}-set-${setIndex}-done" data-exercise-index="${i}" data-set-index="${setIndex}" type="checkbox" ${set.done ? 'checked' : ''}>
+            <span class="check-copy">Logged</span>
+          </label>
         </div>
-        <div class="ex-note">${ex.note}</div>
+        <div class="exercise-comment">
+          <label class="field-label" for="ex-${i}-set-${setIndex}-comment">Set note</label>
+          <input class="field set-input" id="ex-${i}-set-${setIndex}-comment" data-exercise-index="${i}" data-set-index="${setIndex}" data-field="comment" type="text" placeholder="Hard, easy, tweak, pain, grip, form." value="${set.comment}">
+        </div>
+      </div>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="ex-top">
+        <div class="ex-name">${ex.name}</div>
+        <div class="ex-sets">${ex.targetSets} × ${ex.targetReps}</div>
+      </div>
+      <div class="ex-note">${ex.note}</div>
+      <div class="ex-stats">
+        <div class="status-pill${isDone ? ' complete' : ''}">${completedSets} / ${totalSets} sets logged</div>
+        <div class="ex-actions">
+          <button class="mini-btn add-set-btn" data-exercise-index="${i}" type="button">Add set</button>
+          <button class="mini-btn clear-ex-btn" data-exercise-index="${i}" type="button">Clear</button>
+        </div>
+      </div>
+      <div class="set-list">${setRows}</div>
+      <div class="exercise-comment">
+        <label class="field-label" for="exercise-comment-${i}">Exercise note</label>
+        <textarea class="field-textarea exercise-note-input" id="exercise-comment-${i}" data-exercise-index="${i}" placeholder="Technique cue, incline used, elbow felt weird, next-time adjustment.">${exerciseLog.comment}</textarea>
       </div>
     `;
-    card.addEventListener('click', () => {
-      doneState[activeDay][i] = !doneState[activeDay][i];
+    exListEl.appendChild(card);
+  });
+
+  bindDayInteractions();
+}
+
+function bindDayInteractions() {
+  exListEl.querySelectorAll('.set-input').forEach(input => {
+    input.addEventListener('input', event => {
+      const exerciseIndex = Number(event.target.dataset.exerciseIndex);
+      const setIndex = Number(event.target.dataset.setIndex);
+      const field = event.target.dataset.field;
+      getExerciseLog(activeDay, exerciseIndex).sets[setIndex][field] = event.target.value;
+      saveState();
+    });
+  });
+
+  exListEl.querySelectorAll('.set-check').forEach(input => {
+    input.addEventListener('change', event => {
+      const exerciseIndex = Number(event.target.dataset.exerciseIndex);
+      const setIndex = Number(event.target.dataset.setIndex);
+      getExerciseLog(activeDay, exerciseIndex).sets[setIndex].done = event.target.checked;
       saveState();
       renderList();
       renderProgress();
     });
-    exListEl.appendChild(card);
+  });
+
+  exListEl.querySelectorAll('.exercise-note-input').forEach(textarea => {
+    textarea.addEventListener('input', event => {
+      const exerciseIndex = Number(event.target.dataset.exerciseIndex);
+      getExerciseLog(activeDay, exerciseIndex).comment = event.target.value;
+      saveState();
+    });
+  });
+
+  exListEl.querySelectorAll('.add-set-btn').forEach(button => {
+    button.addEventListener('click', event => {
+      const exerciseIndex = Number(event.target.dataset.exerciseIndex);
+      getExerciseLog(activeDay, exerciseIndex).sets.push({
+        reps: '',
+        weight: '',
+        comment: '',
+        done: false
+      });
+      saveState();
+      renderList();
+      renderProgress();
+    });
+  });
+
+  exListEl.querySelectorAll('.clear-ex-btn').forEach(button => {
+    button.addEventListener('click', event => {
+      const exerciseIndex = Number(event.target.dataset.exerciseIndex);
+      const targetExercise = DAYS[activeDay].exercises[exerciseIndex];
+      days[activeDay].exercises[exerciseIndex] = {
+        comment: '',
+        sets: Array.from({ length: targetExercise.targetSets }, () => ({
+          reps: '',
+          weight: '',
+          comment: '',
+          done: false
+        }))
+      };
+      saveState();
+      renderList();
+      renderProgress();
+    });
   });
 }
 
 function renderProgress(){
-  const states = doneState[activeDay];
-  const done = states.filter(Boolean).length;
-  const total = states.length;
+  const { done, total } = getSetSummary(activeDay);
   const pct = total ? (done / total) * 100 : 0;
   barFill.style.width = pct + '%';
-  progressText.textContent = `${done} / ${total} done`;
+  progressText.textContent = `${done} / ${total} sets logged`;
 }
 
 function renderAll(){
   renderTabs();
+  renderConditioning();
   renderList();
   renderProgress();
 }
 
+sessionCommentEl.addEventListener('input', event => {
+  days[activeDay].sessionComment = event.target.value;
+  saveState();
+});
+
 document.getElementById('resetBtn').addEventListener('click', () => {
-  doneState[activeDay] = DAYS[activeDay].exercises.map(() => false);
+  days[activeDay] = createDefaultState().days[activeDay];
   saveState();
   renderList();
   renderProgress();
