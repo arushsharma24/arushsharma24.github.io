@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  :root{
+    --bg: #161513;
+    --bg-card: #1f1d19;
+    --bg-card-hover: #262420;
+    --line: #332f28;
+    --text: #ECE7DC;
+    --text-dim: #9C9486;
+    --text-faint: #6B6457;
+    --accent: #D98B3C;
+    --accent-dim: #5A3F23;
+    --done: #6E9A6E;
+    --done-bg: #1D2419;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    padding: 24px 16px 60px;
+    min-height: 100vh;
+  }
+
+  .wrap{ max-width: 720px; margin: 0 auto; }
+
+  header{ margin-bottom: 22px; }
+
+  .eyebrow{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  h1{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .sub{
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  /* Day tabs */
+  .tabs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 22px 0 18px;
+  }
+  @media (min-width: 560px){
+    .tabs{ grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+
+  .tab{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab:hover{ background: var(--bg-card-hover); }
+  .tab.active{
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .tab .num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .tab.active .num{ color: var(--accent); }
+  .tab .name{
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 2px;
+    line-height: 1.2;
+  }
+  .tab .focus{
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* Meta strip */
+  .meta-strip{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    padding: 0 2px 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 16px;
+  }
+  .meta-strip span.hl{ color: var(--accent); }
+
+  /* Exercise card */
+  .ex-list{ display:flex; flex-direction:column; gap:10px; }
+
+  .ex{
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 14px 14px 12px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+  }
+  .ex.done{
+    background: var(--done-bg);
+    border-color: #2E3D26;
+    opacity: 0.7;
+  }
+
+  .check{
+    flex-shrink:0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--text-faint);
+    margin-top: 2px;
+    cursor: pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .ex.done .check{
+    border-color: var(--done);
+    background: var(--done);
+  }
+  .check svg{ width:12px; height:12px; opacity:0; transition: opacity 0.1s; }
+  .ex.done .check svg{ opacity:1; }
+
+  .ex-body{ flex: 1; min-width: 0; }
+
+  .ex-top{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ex-name{
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .ex.done .ex-name{ text-decoration: line-through; color: var(--text-dim); }
+
+  .ex-sets{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .ex.done .ex-sets{ color: var(--text-faint); }
+
+  .ex-note{
+    font-size: 12.5px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* Progress footer */
+  .progress-wrap{
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap: 12px;
+  }
+  .bar{
+    flex:1;
+    height: 6px;
+    background: var(--bg-card);
+    border-radius: 3px;
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    background: var(--done);
+    width: 0%;
+    transition: width 0.2s;
+  }
+  .progress-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  .reset-btn{
+    margin-top: 14px;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .reset-btn:hover{ border-color: var(--text-dim); color: var(--text-dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Home &amp; Gym &middot; Pick a day</div>
+    <h1>Training Reference</h1>
+    <div class="sub">Tap a day, work through it, tick sets off as you go.</div>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="meta-strip">
+    <span id="metaLabel"></span>
+    <span><span class="hl" id="metaCount"></span> exercises</span>
+  </div>
+
+  <div class="ex-list" id="exList"></div>
+
+  <div class="progress-wrap">
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <div class="progress-text" id="progressText">0 / 0 done</div>
+  </div>
+
+  <button class="reset-btn" id="resetBtn">Reset day</button>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'workout-log-state-v1';
+const DAYS = [
+  {
+    name: "Day 1",
+    title: "Upper Body",
+    focus: "Chest & Back Width",
+    exercises: [
+      { name: "Ring Pull-Ups", sets: "3", reps: "To Failure", note: "Hang from the bar, strict form." },
+      { name: "Incline DB Bench Press", sets: "3", reps: "10-12", note: "Set bench to 30-45°. Hits the upper chest to fill out the collarbone area." },
+      { name: "Ring Rows", sets: "3", reps: "12-15", note: "Feet elevated on the bench to make it harder." },
+      { name: "Flat DB Bench Press", sets: "3", reps: "12-15", note: "Flat bench. Go all the way down until dumbbells touch your chest." },
+      { name: "Seated DB Lateral Raises", sets: "3", reps: "15", note: "Seated on bench — stops torso swing, makes 15kg feel much heavier." },
+      { name: "Hanging Knee/Leg Raises", sets: "3", reps: "12-15", note: "On the pull-up bar. Focus on pulling the pelvis up, not just the legs." }
+    ]
+  },
+  {
+    name: "Day 2",
+    title: "Lower Body",
+    focus: "Glutes & Quad Focus",
+    exercises: [
+      { name: "Deficit Bulgarian Split Squats", sets: "3", reps: "10-12/leg", note: "Back foot flat on the bench. Hold both 15kg DBs. Drop the back knee low." },
+      { name: "Single-Leg Bench Hip Thrusts", sets: "3", reps: "12-15/leg", note: "Upper back on bench edge, one leg in the air. One 15kg DB on the hip." },
+      { name: "Single Leg DB RDL", sets: "3", reps: "10-12/leg", note: "Standing on the floor, holding DBs, focus on the hamstrings." },
+      { name: "DB Bench Step-Ups", sets: "3", reps: "10/leg", note: "Step onto bench with one foot, drive up. Controlled descent." },
+      { name: "Calf Raises", sets: "4", reps: "15-20", note: "Hold DBs, use the bench leg frame or a step for full stretch." }
+    ]
+  },
+  {
+    name: "Day 3",
+    title: "Upper Body",
+    focus: "Shoulders & Arm Hypertrophy",
+    exercises: [
+      { name: "Chest-Supported DB Row", sets: "3", reps: "10-12", note: "Incline bench at 30°, lie chest-down. Eliminates lower-back cheating." },
+      { name: "Seated DB Overhead Press", sets: "3", reps: "10-12", note: "Bench vertical or slight incline. Heavy shoulder press with back support." },
+      { name: "Incline DB Bicep Curls", sets: "3", reps: "10-12", note: "Incline bench at 45°. Arms hang straight down, then curl — big stretch on the bicep." },
+      { name: "Ring Dips or Bench Dips", sets: "3", reps: "To Failure", note: "If ring dips are too hard, do bench dips with feet elevated on a chair." },
+      { name: "Incline DB Rear Delt Flyes", sets: "3", reps: "15", note: "Lie chest-down on 30° incline, fly weights out to the side for rear delts." },
+      { name: "Bench Lying Leg Raises", sets: "3", reps: "15", note: "Lie flat on bench, hold top of bench behind head, raise legs." }
+    ]
+  },
+  {
+    name: "Day 4",
+    title: "Gym Day",
+    focus: "Heavy Iron & Power",
+    exercises: [
+      { name: "Barbell Back Squat", sets: "3", reps: "5-8", note: "Heavy leg stimulation you can't replicate at home." },
+      { name: "Deadlift (Conventional)", sets: "3", reps: "5", note: "Heavy posterior chain — back and hamstrings." },
+      { name: "Barbell Bench Press", sets: "3", reps: "6-8", note: "Test your maximum chest power." },
+      { name: "Lat Pulldown / Cable Row", sets: "3", reps: "8-10", note: "Overload the back with heavy machine weight." },
+      { name: "Leg Press or Hack Squat", sets: "2", reps: "12-15", note: "Finish off the quads safely until failure." }
+    ]
+  }
+];
+
+function createDefaultState() {
+  return {
+    activeDay: 0,
+    doneState: DAYS.map(day => day.exercises.map(() => false))
+  };
+}
+
+function normalizeState(raw) {
+  const fallback = createDefaultState();
+
+  if (!raw || typeof raw !== 'object') {
+    return fallback;
+  }
+
+  const activeDay =
+    Number.isInteger(raw.activeDay) &&
+    raw.activeDay >= 0 &&
+    raw.activeDay < DAYS.length
+      ? raw.activeDay
+      : fallback.activeDay;
+
+  const doneState = DAYS.map((day, dayIndex) => {
+    const rawDay = Array.isArray(raw.doneState?.[dayIndex]) ? raw.doneState[dayIndex] : [];
+    return day.exercises.map((_, exIndex) => Boolean(rawDay[exIndex]));
+  });
+
+  return { activeDay, doneState };
+}
+
+function loadState() {
+  try {
+    return normalizeState(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+  } catch {
+    return createDefaultState();
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ activeDay, doneState })
+    );
+  } catch {
+    // Ignore storage failures so the app still works in private browsing or restricted contexts.
+  }
+}
+
+let { activeDay, doneState } = loadState();
+
+const tabsEl = document.getElementById('tabs');
+const exListEl = document.getElementById('exList');
+const metaLabel = document.getElementById('metaLabel');
+const metaCount = document.getElementById('metaCount');
+const barFill = document.getElementById('barFill');
+const progressText = document.getElementById('progressText');
+
+function renderTabs(){
+  tabsEl.innerHTML = '';
+  DAYS.forEach((day, i) => {
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (i === activeDay ? ' active' : '');
+    tab.innerHTML = `
+      <div class="num">${day.name.toUpperCase()}</div>
+      <div class="name">${day.title}</div>
+      <div class="focus">${day.focus}</div>
+    `;
+    tab.addEventListener('click', () => {
+      activeDay = i;
+      saveState();
+      renderAll();
+    });
+    tabsEl.appendChild(tab);
+  });
+}
+
+function renderList(){
+  const day = DAYS[activeDay];
+  exListEl.innerHTML = '';
+  metaLabel.textContent = `${day.title} — ${day.focus}`;
+  metaCount.textContent = day.exercises.length;
+
+  day.exercises.forEach((ex, i) => {
+    const isDone = doneState[activeDay][i];
+    const card = document.createElement('div');
+    card.className = 'ex' + (isDone ? ' done' : '');
+    card.innerHTML = `
+      <div class="check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#161513" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div class="ex-body">
+        <div class="ex-top">
+          <div class="ex-name">${ex.name}</div>
+          <div class="ex-sets">${ex.sets} × ${ex.reps}</div>
+        </div>
+        <div class="ex-note">${ex.note}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      doneState[activeDay][i] = !doneState[activeDay][i];
+      saveState();
+      renderList();
+      renderProgress();
+    });
+    exListEl.appendChild(card);
+  });
+}
+
+function renderProgress(){
+  const states = doneState[activeDay];
+  const done = states.filter(Boolean).length;
+  const total = states.length;
+  const pct = total ? (done / total) * 100 : 0;
+  barFill.style.width = pct + '%';
+  progressText.textContent = `${done} / ${total} done`;
+}
+
+function renderAll(){
+  renderTabs();
+  renderList();
+  renderProgress();
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  doneState[activeDay] = DAYS[activeDay].exercises.map(() => false);
+  saveState();
+  renderList();
+  renderProgress();
+});
+
+renderAll();
+</script>
+</body>
+</html>
