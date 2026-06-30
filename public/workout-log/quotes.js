@@ -1,0 +1,22 @@
+window.WORKOUT_QUOTES = [
+  { text: 'Waste no more time arguing what a good man should be. Be one.', author: 'Marcus Aurelius' },
+  { text: 'The happiness of your life depends upon the quality of your thoughts.', author: 'Marcus Aurelius' },
+  { text: 'You have power over your mind, not outside events. Realize this, and you will find strength.', author: 'Marcus Aurelius' },
+  { text: 'If it is not right, do not do it; if it is not true, do not say it.', author: 'Marcus Aurelius' },
+  { text: 'It is not death that a man should fear, but he should fear never beginning to live.', author: 'Marcus Aurelius' },
+  { text: 'No man is free who is not master of himself.', author: 'Epictetus' },
+  { text: 'First say to yourself what you would be; and then do what you have to do.', author: 'Epictetus' },
+  { text: 'Difficulties show what men are.', author: 'Epictetus' },
+  { text: 'Circumstances do not make the man, they only reveal him to himself.', author: 'Epictetus' },
+  { text: 'How long are you going to wait before you demand the best for yourself?', author: 'Epictetus' },
+  { text: 'Luck is what happens when preparation meets opportunity.', author: 'Seneca' },
+  { text: 'We suffer more often in imagination than in reality.', author: 'Seneca' },
+  { text: 'It is not that we have a short time to live, but that we waste a lot of it.', author: 'Seneca' },
+  { text: 'Begin at once to live, and count each separate day as a separate life.', author: 'Seneca' },
+  { text: 'He who is brave is free.', author: 'Seneca' },
+  { text: 'The credit belongs to the man who is actually in the arena.', author: 'Theodore Roosevelt' },
+  { text: 'What lies in our power to do, lies in our power not to do.', author: 'Aristotle' },
+  { text: 'Strength does not come from physical capacity. It comes from an indomitable will.', author: 'Mahatma Gandhi' },
+  { text: 'Action may not always bring happiness, but there is no happiness without action.', author: 'William James' },
+  { text: 'I am a part of all that I have met.', author: 'Alfred, Lord Tennyson' }
+];
