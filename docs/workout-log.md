@@ -23,6 +23,8 @@ This mini-app is intentionally static and local-only.
 - Weekly stats are only a summary of the current browser state.
 - Quotes are plain objects with `text` and `author`.
 - Reset only clears the currently active lifting day.
+- `Export Day` copies checked sets from the active lifting day as tab-separated values for Google Sheets or Excel.
+- `Export All` on the stats page copies checked lifting sets from every day plus any filled conditioning entries.
 
 ## Editing Guardrails
 

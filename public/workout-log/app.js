@@ -6,7 +6,9 @@
     createExerciseState,
     loadState,
     saveState,
-    getDaySummary
+    getDaySummary,
+    createExportTsv,
+    copyTextToClipboard
   } = window.WorkoutLogData;
 
   const state = loadState();
@@ -32,6 +34,7 @@
   const quoteAuthorEl = document.getElementById('quoteAuthor');
   const nextQuoteBtn = document.getElementById('nextQuoteBtn');
   const randomQuoteBtn = document.getElementById('randomQuoteBtn');
+  const exportDayBtn = document.getElementById('exportDayBtn');
   const resetBtn = document.getElementById('resetBtn');
 
   function persist() {
@@ -308,6 +311,22 @@
     }
     quoteIndex = nextIndex;
     renderQuote();
+  });
+
+  exportDayBtn.addEventListener('click', async function () {
+    const exportData = createExportTsv(state, { dayIndexes: [activeDay] });
+    const originalLabel = 'Export Day';
+
+    try {
+      await copyTextToClipboard(exportData.text);
+      exportDayBtn.textContent = 'Copied ' + exportData.rowCount + ' Rows';
+    } catch (error) {
+      exportDayBtn.textContent = 'Copy Failed';
+    }
+
+    window.setTimeout(function () {
+      exportDayBtn.textContent = originalLabel;
+    }, 1800);
   });
 
   sessionCommentEl.addEventListener('input', function (event) {

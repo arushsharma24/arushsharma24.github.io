@@ -79,6 +79,19 @@
     color:var(--accent);
   }
 
+  .header-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+
+  .export-btn{
+    appearance:none;
+    background:var(--bg-card);
+    cursor:pointer;
+  }
+
   .hero,
   .card{
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
@@ -216,7 +229,10 @@
       <div class="eyebrow">Current Browser State</div>
       <h1>Weekly Stats</h1>
     </div>
-    <a class="back-link" href="./workout-log.html">Back To Log</a>
+    <div class="header-actions">
+      <button class="back-link export-btn" id="exportAllBtn" type="button">Export All</button>
+      <a class="back-link" href="./workout-log.html">Back To Log</a>
+    </div>
   </header>
 
   <section class="hero">

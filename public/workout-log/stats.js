@@ -1,10 +1,19 @@
 (function () {
-  const { DAYS, CONDITIONING, loadState, getDaySummary, getOverallSummary } = window.WorkoutLogData;
+  const {
+    DAYS,
+    CONDITIONING,
+    loadState,
+    getDaySummary,
+    getOverallSummary,
+    createExportTsv,
+    copyTextToClipboard
+  } = window.WorkoutLogData;
   const state = loadState();
 
   const metricsEl = document.getElementById('metrics');
   const dayStatsEl = document.getElementById('dayStats');
   const conditioningStatsEl = document.getElementById('conditioningStats');
+  const exportAllBtn = document.getElementById('exportAllBtn');
 
   function renderMetrics() {
     const overall = getOverallSummary(state);
@@ -90,6 +99,22 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
   }
+
+  exportAllBtn.addEventListener('click', async function () {
+    const exportData = createExportTsv(state, { includeConditioning: true });
+    const originalLabel = 'Export All';
+
+    try {
+      await copyTextToClipboard(exportData.text);
+      exportAllBtn.textContent = 'Copied ' + exportData.rowCount + ' Rows';
+    } catch (error) {
+      exportAllBtn.textContent = 'Copy Failed';
+    }
+
+    window.setTimeout(function () {
+      exportAllBtn.textContent = originalLabel;
+    }, 1800);
+  });
 
   renderMetrics();
   renderDayStats();

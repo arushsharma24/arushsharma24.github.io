@@ -190,6 +190,118 @@
     }, { doneSets: 0, plannedSets: 0, completeExercises: 0, exerciseCount: 0 });
   }
 
+  const EXPORT_HEADERS = [
+    'Type',
+    'Day',
+    'Workout',
+    'Exercise',
+    'Set',
+    'Reps',
+    'Load',
+    'Set Note',
+    'Exercise Note',
+    'Session Note',
+    'Conditioning',
+    'Sessions',
+    'Conditioning Note'
+  ];
+
+  function sanitizeExportCell(value) {
+    return String(value == null ? '' : value)
+      .replace(/[\t\r\n]+/g, ' ')
+      .trim();
+  }
+
+  function createExportTsv(state, options) {
+    const settings = options || {};
+    const dayIndexes = Array.isArray(settings.dayIndexes)
+      ? settings.dayIndexes
+      : DAYS.map(function (_, index) { return index; });
+    const includeConditioning = Boolean(settings.includeConditioning);
+    const rows = [];
+
+    dayIndexes.forEach(function (dayIndex) {
+      const day = DAYS[dayIndex];
+      const dayLog = state.days[dayIndex];
+
+      if (!day || !dayLog) {
+        return;
+      }
+
+      day.exercises.forEach(function (exercise, exerciseIndex) {
+        const exerciseLog = dayLog.exercises[exerciseIndex];
+
+        exerciseLog.sets.forEach(function (set, setIndex) {
+          if (!set.done) {
+            return;
+          }
+
+          rows.push([
+            'Lifting',
+            day.name,
+            day.title,
+            exercise.name,
+            setIndex + 1,
+            set.reps,
+            set.weight,
+            set.comment,
+            exerciseLog.comment,
+            dayLog.sessionComment,
+            '',
+            '',
+            ''
+          ]);
+        });
+      });
+    });
+
+    if (includeConditioning) {
+      CONDITIONING.forEach(function (item) {
+        const values = state.conditioning[item.key];
+
+        if (!values || (!values.count.trim() && !values.note.trim())) {
+          return;
+        }
+
+        rows.push([
+          'Conditioning', '', '', '', '', '', '', '', '', '', item.name, values.count, values.note
+        ]);
+      });
+    }
+
+    const tsvRows = [EXPORT_HEADERS].concat(rows).map(function (row) {
+      return row.map(sanitizeExportCell).join('\t');
+    });
+
+    return { text: tsvRows.join('\n'), rowCount: rows.length };
+  }
+
+  async function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return;
+      } catch (error) {
+        // Fall back for browsers that expose the API but deny clipboard access.
+      }
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    if (!copied) {
+      throw new Error('Clipboard copy failed');
+    }
+  }
+
   window.WorkoutLogData = {
     STORAGE_KEY,
     DAYS,
@@ -201,6 +313,8 @@
     loadState,
     saveState,
     getDaySummary,
-    getOverallSummary
+    getOverallSummary,
+    createExportTsv,
+    copyTextToClipboard
   };
 })();
